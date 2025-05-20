@@ -12,16 +12,26 @@ namespace KPIPractice3.Files_I
     /// </summary>
     public class Task3
     {
-        public string Execute(string path)
+        public void Execute(string path, string contents)
         {
-            // TODO: реалізувати за допомогою File.ReadAllText
-            throw new NotImplementedException();
+            File.WriteAllText(path, contents);
+            Console.WriteLine($"Файл успішно створено за шляхом: {path}");
+        }
+
+        public void ReadFile(string path)
+        {
+            string content = File.ReadAllText(path);
+            conole.WriteLine($"вміст файлу{content}")
         }
 
         public void Main()
         {
-            // TODO: приклад читання та виведення вмісту файлу
-            throw new NotImplementedException();
+            // Приклад створення файлу та запису тексту
+            string filePath = "example.txt";
+            string text = "Це приклад запису тексту у файл.";
+
+            Execute(filePath, text);
+            ReadFile(filePath)
         }
     }
 }

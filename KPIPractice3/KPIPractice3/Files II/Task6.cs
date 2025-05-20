@@ -1,21 +1,31 @@
 ﻿namespace KPIPractice3.Files_II
 {
     /// <summary>
-    /// Завдання 6: Рекурсивно вивести дерево каталогів і файлів з відступами.
-    /// Метод Execute приймає кореневий шлях та рівень відступу.
+    /// Рекурсивно виводить дерево каталогів і файлів з відступами.
     /// </summary>
-    public class Task6
+    public void Execute(string rootPath, int indent = 0)
     {
-        public void Execute(string rootPath, int indent = 0)
+        // Вивід назви поточної директорії
+        Console.WriteLine($"{new string(' ', indent)}[DIR] {Path.GetFileName(rootPath)})
+
+        // Вивід усіх файлів у директорії
+        foreach (string file in Directory.GetFiles(rootPath))
         {
-            // TODO: скористатися Directory.GetDirectories/GetFiles та рекурсією
-            throw new NotImplementedException();
+            Console.WriteLine($"{new string(' ', indent + 2)}{Path.GetFileName(file)}");
         }
 
-        public void Main()
+        // Рекурсивний обхід усіх піддиректорій
+        foreach (string directory in Directory.GetDirectories(rootPath))
         {
-            // TODO: приклад виводу структури поточної директорії
-            throw new NotImplementedException();
+            Execute(directory, indent + 2); // Збільшуємо відступ
         }
+    }
+
+    public void Main()
+    {
+        string currentDirectory = Directory.GetCurrentDirectory();
+
+        Console.WriteLine("Структура поточної директорії:");
+        Execute(currentDirectory);
     }
 }
